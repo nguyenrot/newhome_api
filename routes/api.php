@@ -39,4 +39,16 @@ Route::prefix('auth')->group(function (){
         'as' => 'register',
         'uses' => 'App\Http\Controllers\Api\AuthController@register',
     ]);
+    Route::post('/login',[
+        'as' => 'login',
+        'uses' => 'App\Http\Controllers\Api\AuthController@login',
+    ]);
+    Route::get('/current_user',[
+        'as' => 'current_user',
+        'uses' => 'App\Http\Controllers\Api\AuthController@getCurrentUser',
+    ])->middleware('auth:sanctum');
+    Route::post('/logout',[
+        'as' => 'logout',
+        'uses' => 'App\Http\Controllers\Api\AuthController@logout',
+    ])->middleware('auth:sanctum');
 });
