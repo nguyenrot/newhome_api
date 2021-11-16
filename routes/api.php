@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,5 +31,12 @@ Route::prefix('location')->group(function (){
     Route::get('/{id_city}/{id}',[
         'as'=>'location',
         'uses'=>'App\Http\Controllers\Api\LocationController@district_id',
+    ]);
+});
+
+Route::prefix('auth')->group(function (){
+    Route::post('/register',[
+        'as' => 'register',
+        'uses' => 'App\Http\Controllers\Api\AuthController@register',
     ]);
 });
