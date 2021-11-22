@@ -181,7 +181,7 @@
         <span class="square">
             <a class="tenth before after" href="{{$url}}auth/register">{{$url}}auth/register</a>
         </span>
-        <h2 style="font-size: 1.5em">{ param :name, email, password, password_confirmation }</h2>
+        <h2 style="font-size: 1.5em">{ param :name, email, password, password_confirmation, account_type }</h2>
     </div>
     <div class="wrapper">
         <h2 style="">login (POST) :</h2>

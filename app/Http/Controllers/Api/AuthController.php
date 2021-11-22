@@ -15,6 +15,9 @@ class AuthController extends Controller
     public function register(UserRegisterRequest $request){
         $validated = $request->validated();
         $validated['password'] = Hash::make($validated['password']);
+        if (!$validated['account_type']){
+            $validated['account_type'] = 1;
+        }
         $user = User::create($validated);
         return response()->json(["user" => $user, 'msg' => 'Đăng ký thành công'],200,
             ['Content-Type' => 'application/json;charset=UTF-8', 'Charset' => 'utf-8'], JSON_UNESCAPED_UNICODE);
@@ -36,7 +39,7 @@ class AuthController extends Controller
 
     //Lay thong tin dang nhap
     public function getCurrentUser(){
-        return response()->json(auth()->user(),200,
+        return response()->json([auth()->user(),],200,
             ['Content-Type' => 'application/json;charset=UTF-8', 'Charset' => 'utf-8'], JSON_UNESCAPED_UNICODE);
     }
 

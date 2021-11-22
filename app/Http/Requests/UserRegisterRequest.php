@@ -28,6 +28,7 @@ class UserRegisterRequest extends FormRequest
             'name' => 'required',
             'email' => 'bail|required|min:10|max:255|unique:users',
             'password' => 'bail|required|confirmed|min:8|max:32',
+            'account_type' => 'bail|required',
         ];
     }
 
