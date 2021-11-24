@@ -15,7 +15,7 @@ class AuthController extends Controller
     public function register(UserRegisterRequest $request){
         $validated = $request->validated();
         $validated['password'] = Hash::make($validated['password']);
-        if (!$validated['account_type']){
+        if (!$validated['account_type'] && $validated['account_type']!=0){
             $validated['account_type'] = 1;
         }
         $user = User::create($validated);

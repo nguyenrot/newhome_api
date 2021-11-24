@@ -19,6 +19,29 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::prefix('category')->group(function (){
+    Route::get('/',[
+        'as'=>'all_category',
+        'uses'=>'App\Http\Controllers\Api\CategoryController@index',
+    ]);
+    Route::get('/{id}',[
+        'as'=>'get_category',
+        'uses'=>'App\Http\Controllers\Api\CategoryController@get',
+    ]);
+    Route::patch('/{id}',[
+        'as'=>'post_category',
+        'uses'=>'App\Http\Controllers\Api\CategoryController@patch',
+    ])->middleware('auth:sanctum','checkadmin');
+    Route::post('/',[
+        'as'=>'create_category',
+        'uses'=>'App\Http\Controllers\Api\CategoryController@create',
+    ])->middleware('auth:sanctum','checkadmin');
+    Route::delete('/{id}',[
+        'as'=>'create_category',
+        'uses'=>'App\Http\Controllers\Api\CategoryController@delete',
+    ])->middleware('auth:sanctum','checkadmin');
+});
+
 Route::prefix('location')->group(function (){
     Route::get('/',[
         'as'=>'location',

@@ -4,6 +4,7 @@ namespace App\Http;
 
 use App\Http\Middleware\checkadmin;
 use App\Http\Middleware\checkuser1;
+use App\Http\Middleware\checkuser2;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
