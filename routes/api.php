@@ -19,6 +19,29 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::prefix('information')->group(function (){
+    Route::get('/user/{id}',[
+        'as'=>'get_info_user',
+        'uses'=>'App\Http\Controllers\Api\UserInformationController@get_infor_user'
+    ]);
+    Route::get('/{id}',[
+        'as'=>'get_ìno',
+        'uses'=>'App\Http\Controllers\Api\UserInformationController@get'
+    ])->middleware('auth:sanctum','checkuser2');
+    Route::post('/',[
+       'as'=>'post_info',
+       'uses'=>'App\Http\Controllers\Api\UserInformationController@post'
+    ])->middleware('auth:sanctum','checkuser2');
+    Route::patch('/{id}',[
+        'as'=>'patch_info',
+        'uses'=>'App\Http\Controllers\Api\UserInformationController@patch'
+    ])->middleware('auth:sanctum','checkuser2');
+    Route::delete('/{id}',[
+        'as'=>'delete_info',
+        'uses'=>'App\Http\Controllers\Api\UserInformationController@delete'
+    ])->middleware('auth:sanctum','checkuser2');
+});
+
 Route::prefix('category')->group(function (){
     Route::get('/',[
         'as'=>'all_category',

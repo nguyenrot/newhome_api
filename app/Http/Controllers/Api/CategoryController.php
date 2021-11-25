@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\api;
+namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
@@ -41,7 +41,11 @@ class CategoryController extends Controller
             if (!empty($path)) {
                 $data['image'] = Storage::url($path);
             }
-            $this->category->find($id)->update($data);
+            $category = $this->category->find($id);
+            if (empty($category))
+                return response()->json(['msg' => 'Cập nhập thất bại'],203,
+                    ['Content-Type' => 'application/json;charset=UTF-8', 'Charset' => 'utf-8'], JSON_UNESCAPED_UNICODE);
+            $category->update($data);
             DB::commit();
             return response()->json(["category" => $this->category->find($id), 'msg' => 'Cập nhập thành công'],200,
                 ['Content-Type' => 'application/json;charset=UTF-8', 'Charset' => 'utf-8'], JSON_UNESCAPED_UNICODE);
@@ -55,7 +59,11 @@ class CategoryController extends Controller
     function delete($id){
         try{
             DB::beginTransaction();
-            $this->category->find($id)->delete();
+            $category = $this->category->find($id);
+            if (empty($category))
+                return response()->json(['msg' => 'Xóa thất bại'],203,
+                    ['Content-Type' => 'application/json;charset=UTF-8', 'Charset' => 'utf-8'], JSON_UNESCAPED_UNICODE);
+            $category->delete();
             DB::commit();
             return response()->json(['msg' => 'Xóa thành công'],200,
                 ['Content-Type' => 'application/json;charset=UTF-8', 'Charset' => 'utf-8'], JSON_UNESCAPED_UNICODE);
